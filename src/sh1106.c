@@ -25,6 +25,7 @@
 #include <linux/string.h>
 #include <linux/workqueue.h>
 #include <linux/timer.h>
+#include <linux/version.h>
 
 #include "sh1106.h"
 #include "fb.h"
@@ -171,7 +172,7 @@ void sh1106_init(struct i2c_client *client) {
 }
 
 
-void drawPixel(int16_t x, int16_t y, uint8_t color) {
+void draw_pixel(int16_t x, int16_t y, uint8_t color) {
     if (x < 0 || x >= OLED_WIDTH || y < 0 || y >= OLED_HEIGHT) {
         pr_info("x y out of bounds");
         return;
@@ -203,7 +204,7 @@ void sh1106_sync_fb_to_buffer(void) {
 
             // Read pixel
             int pixel = (fb_buffer[byte_index] >> bit_pos) & 1;
-            drawPixel(x,y,pixel);
+            draw_pixel(x,y,pixel);
         }
     }
 }
@@ -242,7 +243,11 @@ static int sh1106_detect(struct i2c_client *i, struct i2c_board_info *) {
     return 0;
 }
 
+// Switch probe signature depending on version
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6,3,0)
 static int sh1106_probe(struct i2c_client *client, const struct i2c_device_id *)
+#else
+static int sh1106_probe(struct i2c_client *client)
 {
     memset(buffer, 0, sizeof(buffer));
     pr_info("SH1106 OLED display found at 0x%02x\n", client->addr);
@@ -308,9 +313,9 @@ static int sh1106_probe(struct i2c_client *client, const struct i2c_device_id *)
     for(int x =0;x < OLED_WIDTH; x++) {
         for(int y =0;y < OLED_HEIGHT; y++) {
             if (y%2 == 1) {
-                drawPixel(x, y, sh1106_WHITE);
+                draw_pixel(x, y, sh1106_WHITE);
             }else{
-                drawPixel(x,y, sh1106_BLACK);
+                draw_pixel(x,y, sh1106_BLACK);
             }
         }
     }
