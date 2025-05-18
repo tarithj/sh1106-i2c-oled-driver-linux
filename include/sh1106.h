@@ -53,7 +53,6 @@ void sh1106_flush_display_work(struct work_struct *work);
 
 extern struct i2c_client *sh1106_i2c_client;
 extern uint8_t buffer[SH1106_WIDTH * ((SH1106_HEIGHT + 7) / 8)];
-extern int contrast_value;
 
 extern struct workqueue_struct *display_wq;
 extern struct timer_list sh1106_timer;
