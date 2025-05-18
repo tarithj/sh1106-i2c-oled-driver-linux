@@ -55,7 +55,7 @@ static int sh1106_probe(struct i2c_client *client, const struct i2c_device_id *i
     sh1106_init(client);
     sh1106_i2c_client = client;
     int ret = 0;
-    sh1106_sysfs_init();
+    sh1106_sysfs_init(client);
     
     if (enable_fb) {
         fb_buffer = devm_kzalloc(&client->dev, FB_SIZE, GFP_KERNEL);
@@ -106,7 +106,7 @@ static int sh1106_probe(struct i2c_client *client, const struct i2c_device_id *i
 // Remove function
 static void sh1106_remove(struct i2c_client *client) {
     dev_info(&client->dev, "Removing SH1106 OLED device\n");
-    sh1106_sysfs_cleanup();
+    sh1106_sysfs_cleanup(client);
     del_timer_sync(&sh1106_timer);
     flush_workqueue(display_wq); 
     destroy_workqueue(display_wq);
