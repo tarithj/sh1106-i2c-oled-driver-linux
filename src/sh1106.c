@@ -54,9 +54,9 @@ static int sh1106_probe(struct i2c_client *client, const struct i2c_device_id *i
     display_wq = alloc_workqueue("my_wq", WQ_UNBOUND, 0);
     sh1106_init(client);
     sh1106_i2c_client = client;
-    
+    int ret = 0;
     sysfs_init();
-
+    
     if (enable_fb) {
         fb_buffer = devm_kzalloc(&client->dev, FB_SIZE, GFP_KERNEL);
         if (!fb_buffer) {
