@@ -2,7 +2,7 @@
 #include "../include/sysfs.h"
 
 
-int sh1106_sysfs_init(void) {
+int sh1106_sysfs_init(struct i2c_client *client) {
     // Create sysfs entry for contrast
     int ret = device_create_file(&client->dev, &dev_attr_contrast);
     if (ret) {
@@ -12,7 +12,7 @@ int sh1106_sysfs_init(void) {
     return ret;
 }
 
-int sh1106_sysfs_cleanup(void) {
+int sh1106_sysfs_cleanup(struct i2c_client *client) {
     device_remove_file(&client->dev, &dev_attr_contrast);
     return 0;
 }

@@ -16,10 +16,10 @@ struct sysfs_attr {
 };
 
 // Declare the function for initializing the sysfs entries
-int sh1106_sysfs_init(void);
+int sh1106_sysfs_init(struct i2c_client *client);
 
 // Declare the function for cleaning up the sysfs entries
-void sh1106_sysfs_cleanup(void);
+void sh1106_sysfs_cleanup(struct i2c_client *client);
 
 // Define the device attribute structure
 extern struct device_attribute dev_attr_contrast;
