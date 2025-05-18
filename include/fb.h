@@ -13,6 +13,6 @@ void fb_cleanup(void);
 // Declare a framebuffer information structure
 struct fb_info *fb_info;
 
-extern struct fb_ops sh1106_fb_ops;
+struct fb_ops sh1106_fb_ops;
 
 #endif /* _FB_H */
