@@ -22,6 +22,6 @@ int sysfs_init(void);
 void sysfs_cleanup(void);
 
 // Define the device attribute structure
-extern struct device_attribute dev_attr_example;
+extern struct device_attribute dev_attr_contrast;
 
 #endif /* _SYSFS_H */

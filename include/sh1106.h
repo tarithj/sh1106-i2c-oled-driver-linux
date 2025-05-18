@@ -7,9 +7,15 @@
 #include <linux/workqueue.h>
 #include <linux/timer.h>
 
+#include <linux/module.h>
+#include <linux/slab.h>
+#include <linux/version.h>
+
+
 #define OLED_I2C_ADDR 0x3C
-#define SSD1306_WIDTH 128
-#define SSD1306_HEIGHT 64
+#define SH1106_WIDTH 128
+#define SH1106_HEIGHT 64
+#define FB_SIZE (SH1106_WIDTH * SH1106_HEIGHT)
 
 #define sh1106_WHITE 0
 #define sh1106_BLACK 1
@@ -46,14 +52,13 @@ void queue_refresh_display_delayed_work(void);
 void sh1106_flush_display_work(struct work_struct *work);
 
 extern struct i2c_client *sh1106_i2c_client;
-extern uint8_t buffer[OLED_WIDTH * ((OLED_HEIGHT + 7) / 8)];
+extern uint8_t buffer[SH1106_WIDTH * ((SH1106_HEIGHT + 7) / 8)];
 extern int contrast_value;
 
 extern struct workqueue_struct *display_wq;
 extern struct timer_list sh1106_timer;
-extern struct framebuffer_info *info;
+extern struct fb_info *info;
 extern uint8_t *fb_buffer;
-
 
 
 #endif

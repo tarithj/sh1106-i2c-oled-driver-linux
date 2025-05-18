@@ -1,5 +1,18 @@
 #include "sh1106.h"
 #include "../include/fb.h"
+
+
+static struct fb_ops sh1106_fb_ops = {
+    .owner = THIS_MODULE,
+    .fb_read = fb_sys_read,
+    .fb_write = fb_sys_write,
+    .fb_fillrect = sys_fillrect,
+    .fb_copyarea = sys_copyarea,
+    .fb_imageblit = sys_imageblit,
+    .fb_ioctl = NULL,
+};
+
+
 void sh1106_sync_fb_to_buffer(void) {
     // Contains 8 pixels in one byte
     for (int y = 0; y < OLED_HEIGHT; y++) {
