@@ -1,4 +1,4 @@
-#include "sh1106.h"
+#include "../include/sh1106.h"
 #include "../include/fb.h"
 
 
