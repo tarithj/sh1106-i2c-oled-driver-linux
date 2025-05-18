@@ -16,8 +16,8 @@ remove_mod:
 
 test: all
 	-echo 0x3c | sudo tee /sys/bus/i2c/devices/i2c-3/delete_device
-	-sudo rmmod sh1106
-	-sudo insmod sh1106.ko
+	-sudo rmmod src/sh1106
+	-sudo insmod src/sh1106.ko
 	-echo SH1106 0x3c | sudo tee /sys/bus/i2c/devices/i2c-3/new_device
 
 
