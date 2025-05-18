@@ -1,5 +1,5 @@
-#ifndef _SYSFS_H
-#define _SYSFS_H
+#ifndef _SH1106_SYSFS_H
+#define _SH1106_SYSFS_H
 
 #include <linux/kernel.h>
 #include <linux/sysfs.h>
@@ -16,10 +16,10 @@ struct sysfs_attr {
 };
 
 // Declare the function for initializing the sysfs entries
-int sysfs_init(void);
+int sh1106_sysfs_init(void);
 
 // Declare the function for cleaning up the sysfs entries
-void sysfs_cleanup(void);
+void sh1106_sysfs_cleanup(void);
 
 // Define the device attribute structure
 extern struct device_attribute dev_attr_contrast;

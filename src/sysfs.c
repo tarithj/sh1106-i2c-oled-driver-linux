@@ -3,7 +3,7 @@
 
 static DEVICE_ATTR(contrast, S_IRUGO | S_IWUSR, contrast_show, contrast_store);
 
-int sysfs_init(void) {
+int sh1106_sysfs_init(void) {
     // Create sysfs entry for contrast
     int ret = device_create_file(&client->dev, &dev_attr_contrast);
     if (ret) {
@@ -13,7 +13,7 @@ int sysfs_init(void) {
     return ret;
 }
 
-int sysfs_cleanup(void) {
+int sh1106_sysfs_cleanup(void) {
     device_remove_file(&client->dev, &dev_attr_contrast);
     return 0;
 }
