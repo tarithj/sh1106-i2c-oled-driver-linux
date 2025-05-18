@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "fb.h": "c",
+        "i2c.h": "c",
+        "module.h": "c",
+        "string.h": "c",
+        "kernel.h": "c",
+        "ssd1306.h": "c",
+        "sh1106.h": "c",
+        "sysfs.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

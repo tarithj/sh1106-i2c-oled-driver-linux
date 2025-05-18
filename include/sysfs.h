@@ -24,4 +24,4 @@ void sh1106_sysfs_cleanup(void);
 // Define the device attribute structure
 extern struct device_attribute dev_attr_contrast;
 
-#endif /* _SYSFS_H */
+#endif /* _SH1106_SYSFS_H */

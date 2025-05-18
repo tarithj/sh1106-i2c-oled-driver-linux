@@ -1,7 +1,6 @@
 #include "../include/sh1106.h"
 #include "../include/sysfs.h"
 
-static DEVICE_ATTR(contrast, S_IRUGO | S_IWUSR, contrast_show, contrast_store);
 
 int sh1106_sysfs_init(void) {
     // Create sysfs entry for contrast
@@ -40,4 +39,7 @@ static ssize_t contrast_store(struct device *dev, struct device_attribute *attr,
 
     return count; // Return number of bytes written
 }
+
+static DEVICE_ATTR(contrast, S_IRUGO | S_IWUSR, contrast_show, contrast_store);
+
 
