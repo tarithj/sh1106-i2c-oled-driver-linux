@@ -54,13 +54,8 @@ static int sh1106_probe(struct i2c_client *client, const struct i2c_device_id *i
     display_wq = alloc_workqueue("my_wq", WQ_UNBOUND, 0);
     sh1106_init(client);
     sh1106_i2c_client = client;
-
-    // Create sysfs entry for contrast
-    int ret = device_create_file(&client->dev, &dev_attr_contrast);
-    if (ret) {
-        dev_err(&client->dev, "Failed to create sysfs entry for contrast\n");
-        return ret;
-    }
+    
+    sysfs_init();
 
     if (enable_fb) {
         fb_buffer = devm_kzalloc(&client->dev, FB_SIZE, GFP_KERNEL);
@@ -111,8 +106,7 @@ static int sh1106_probe(struct i2c_client *client, const struct i2c_device_id *i
 // Remove function
 static void sh1106_remove(struct i2c_client *client) {
     dev_info(&client->dev, "Removing SH1106 OLED device\n");
-
-    device_remove_file(&client->dev, &dev_attr_contrast);
+    sysfs_cleanup();
     del_timer_sync(&sh1106_timer);
     flush_workqueue(display_wq); 
     destroy_workqueue(display_wq);
