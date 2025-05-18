@@ -1,4 +1,4 @@
-#include "sh1106.h"
+#include "../include/sh1106.h"
 #include "../include/sysfs.h"
 
 static int contrast_value = 127; // Default contrast value (range from 0 to 255)
